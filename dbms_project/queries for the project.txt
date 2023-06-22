@@ -1,0 +1,46 @@
+use dbms_project;
+#1
+SELECT * FROM property
+WHERE address_line_3 = 'South Delhi'
+AND year_of_construction > 2001
+AND mode = 'R';
+
+
+#2
+SELECT address_line_1, address_line_2, address_line_3 FROM property
+WHERE address_line_3 = 'West Delhi'
+AND selling_price >= 3000000
+AND selling_price <= 5000000;
+
+#3
+SELECT address_line_1, address_line_2, address_line_3 FROM property
+WHERE address_line_2 = 'Vijay Nagar' 
+AND mode = 'R'
+AND (p_type ='2BHK' or p_type='3BHK')
+AND renting_price < 15000;
+
+#4
+SELECT e.name AS agent_name, SUM(p.selling_price) AS total_amount
+FROM employee e
+JOIN seller s ON e.emp_id = s.emp_id
+JOIN property p ON s.seller_id = p.seller_id
+JOIN status st ON p.p_id = st.p_id
+WHERE YEAR(st.date) = 2012
+GROUP BY e.name
+ORDER BY total_amount DESC
+LIMIT 1;
+
+#5
+SELECT s.seller_id, e.name AS agent_name, AVG(p.selling_price) AS avg_selling_price, AVG(DATEDIFF(st.date, p.date_of_reg)) AS avg_time_on_market_in_days
+FROM seller s
+JOIN employee e ON s.emp_id = e.emp_id
+JOIN property p ON s.seller_id = p.seller_id
+JOIN status st ON p.p_id = st.p_id
+WHERE YEAR(p.date_of_reg) = 2010
+GROUP BY s.seller_id;
+
+
+#6
+SELECT * FROM property WHERE selling_price = (SELECT MAX(selling_price) FROM property)
+Union
+SELECT * FROM property WHERE renting_price = (SELECT MAX(renting_price) FROM property);

@@ -1,0 +1,26 @@
+<RCC>
+  <qresource prefix="images">
+    <file>C:/Users/ashut/Downloads/on_sale_on_rent-removebg-preview.png</file>
+    <file>C:/Users/ashut/Downloads/realtor-removebg-preview.png</file>
+    <file>C:/Users/ashut/Downloads/5031659-removebg-preview.png</file>
+    <file>background.jpg</file>
+    <file>building-user-solid.svg</file>
+    <file>city-solid.svg</file>
+    <file>copyright-solid.svg</file>
+    <file>DATA.txt</file>
+    <file>envelope-circle-check-solid.svg</file>
+    <file>houseon rent.jpg</file>
+    <file>house-user-solid.svg</file>
+    <file>money-check-dollar-solid.svg</file>
+    <file>on sale on rent.jpg</file>
+    <file>PN.jpg</file>
+    <file>PROPERTY NETWORKS.svg</file>
+    <file>realtor.jpg</file>
+    <file>square-instagram.svg</file>
+    <file>tree branch.jpg</file>
+    <file>twitter.svg</file>
+    <file>urban landscape.jpg</file>
+    <file>user-solid.svg</file>
+    <file>user-tie-solid.svg</file>
+  </qresource>
+</RCC>

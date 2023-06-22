@@ -1,0 +1,582 @@
+from PyQt5 import QtWidgets, uic
+
+# Load the UI file
+app = QtWidgets.QApplication([])
+window = uic.loadUi("my_ui_file.ui")
+
+# Get the input value from a text field
+input_value = window.text_field.text()
+
+# Use the input value in your program logic
+print("The user entered:", input_value)
+
+# Show the UI form
+window.show()
+app.exec()
+print(self.ui.my_button.receivers(self.ui.my_button.clicked), "receiver(s) connected")
+self.ui.my_button.setVisible(True)
+self.ui.my_button.setEnabled(True)
+------------------------------------------------------------
+class MainWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Main Window')
+        self.button = QPushButton('Open Another UI', self)
+        self.button.clicked.connect(self.open_another_ui)
+        layout = QVBoxLayout(self)
+        layout.addWidget(self.button)
+        self.show()
+
+    def open_another_ui(self):
+        # code to open another UI goes here
+---------------------------------------------------------------
+class AnotherWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Another Window')
+        self.show()
+----------------------------------------------------------------
+def open_another_ui(self):
+    another_window = AnotherWindow()
+    another_window.show()
+----------------------------------------------------------------
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.uic import loadUi
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        # Load the main UI file
+        loadUi('file.ui', self)
+
+        # Connect the "clicked" signal of the button to a slot method
+        self.open_my_ui_file1_button.clicked.connect(self.open_my_ui_file1)
+
+    def open_my_ui_file1(self):
+        # Load the second UI file
+        my_ui_file1 = loadUi('my_ui_file1.ui')
+
+        # Show the second UI file
+        my_ui_file1.show()
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    main_window = MainWindow()
+    main_window.show()
+    sys.exit(app.exec_())
+-----------------------------------------------------------
+from PyQt5.uic import loadUiType
+        frame2, _ = loadUiType('pnframe2.ui')
+        frame_2 = frame2()
+        frame_2.exec_()
+-----------------------------------------------------------
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.uic import loadUi
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        # Load the main UI file
+        loadUi('file.ui', self)
+
+        # Connect the "clicked" signal of the button to a slot method
+        self.open_my_ui_file1_button.clicked.connect(self.open_my_ui_file1)
+
+    def open_my_ui_file1(self):
+        # Load the second UI file
+        my_ui_file1 = loadUi('my_ui_file1.ui')
+
+        # Show the second UI file
+        my_ui_file1.show()
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    main_window = MainWindow()
+    main_window.show()
+    sys.exit(app.exec_())
+---------------------------------------------------------------
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QStackedWidget, QWidget, QVBoxLayout
+from PyQt5.uic import loadUi
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.stacked_widget = QStackedWidget()
+        self.setCentralWidget(self.stacked_widget)
+
+        frame1_widget = QWidget()
+        frame1_layout = QVBoxLayout(frame1_widget)
+        self.frame1 = loadUi('frame1.ui')
+        self.frame1.submit_button.clicked.connect(self.open_frame2)
+        frame1_layout.addWidget(self.frame1)
+
+        frame2_widget = QWidget()
+        frame2_layout = QVBoxLayout(frame2_widget)
+        self.frame2 = loadUi('frame2.ui')
+        frame2_layout.addWidget(self.frame2)
+
+        self.stacked_widget.addWidget(frame1_widget)
+        self.stacked_widget.addWidget(frame2_widget)
+
+    def open_frame2(self):
+        self.stacked_widget.setCurrentIndex(1)
+-------------------------------------------------------------------
+def open_frame2(self):
+        self.stacked_widget.setCurrentIndex(1)
+-------------------------------------------------------------------
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    main_window = MainWindow()
+    main_window.show()
+    sys.exit(app.exec_())
+--------------------------------------------------------------------
+    def login(self):
+        userID = int(self.LineEdit.text())
+        password = self.LineEdit_2.text()
+        try:
+            mydb= mc.connect(
+                host="localhost",
+                user="root",
+                password="Yash@2914",
+                database="dbms_project"
+            )
+            mycursor= mydb.cursor()
+            query="Select * from employee where username like ' "+userID+" ' and password like ' "+password+" ' "
+            mycursor.execute(query)
+            row=mycursor.fetchone
+
+            if row==None:
+                self.label_result.setText("NO USER FOUND")
+
+            else:
+                self.label_result.setText("VALID!")
+                uic.loadUi("pnframe2.ui",self)
+
+        except mc.Error as e:
+            self.label_result.setText("INVALID!")
+
+            self.pushButton.clicked.connect(self.login)
+            -------------------------------------------------------------------------------------
+            # pyuic5 -x my_ui_file.ui -o my_ui_file.py
+from frame1 import Ui_QmainWindow
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.uic import loadUi
+# Load the UI file
+Ui_MainWindow, QtBaseClass = uic.loadUiType("PropertyNetworks.ui")
+
+class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
+     def __init__(self):
+         super(MyApp, self).__init__()
+         Ui_MainWindow.__init__(self)
+         self.setupUi(self)
+         self.pushButton.clicked.connect(self.button_clicked)
+
+     def button_clicked(self):
+        print("BUTTON CLICKED!")
+        from PyQt5.uic import loadUiType
+        frame2, _ = loadUiType('pnframe2.ui')
+        frame_2 = frame2()
+        frame_2.exec_()
+        userID = self.lineEdit.text()
+        password = self.lineEdit_2.text()
+        print(userID)
+        print(password)
+
+if __name__ == "__main__":
+     app = QtWidgets.QApplication(sys.argv)
+     window = MyApp()
+     window.show()
+     sys.exit(app.exec_())
+#------------------------------------------------------------
+# from frame1 import Ui_QmainWindow
+# class MainWindow(QmainWindow, Ui_QmainWindow):
+#     def __init__(self):
+#         super().__init__()
+#         self.setupUi(self)
+#         self.pushButton.clicked.connect(self.button_clicked)
+#
+#     def button_clicked(self):
+#         input_text = self.lineEdit.text()
+#         print(input_text)
+#
+# app = QtWidgets.QApplication(sys.argv)
+# window = MainWindow()
+# window.show()
+# sys.exit(app.exec_())
+---------------------------------------------------------------------
+# uic.loadUi("pnframe2.ui", self)
+                        # execfile("frame2.py")
+                        # os.system('pyhton frame2.py')
+                        # subprocess.run(["python","frame2.py"])
+-------------------------------------------------------------------------
+        def Agentreport(self):
+            # self.ui = Agentoffice_MainWindow()
+            agent_ID = str(self.lineEdit_agentID.text())
+            print(agent_ID)  # input
+            try:
+                    mydb = mc.connect(
+                            host="localhost",
+                            user="root",
+                            password="Yash@2914",
+                            database="dbms_project"
+                    )
+                    cursor = mydb.cursor()
+                    query = "SELECT s.emp_id, st.date, p.p_type, p.address_line_1, p.address_line_2, p.address_line_3, p.selling_price from seller as s join property as p join status as st where s.seller_id=p.seller_id and p.mode like 'Sold' and emp_id like '" + agent_ID + "'"
+                    query2= "SELECT s.emp_id, st.date, p.p_type, p.address_line_1, p.address_line_2, p.address_line_3, p.selling_price from seller as s join property as p join status as st where s.seller_id=p.seller_id and p.mode like 'Rented' and emp_id like '" + agent_ID + "'"
+                    cursor.execute(query)
+                    result = cursor.fetchall()
+                    self.agentreport.setRowCount(0)
+                    for row_Number, row_data in enumerate(result):
+                            self.agentreport.insertRow(row_Number)
+                            for column_Number, data in enumerate(row_data):
+                                    self.agentreport.setItem(row_Number, column_Number, QTableWidgetItem(str(data)))
+
+                    cursor.execute(query2)
+                    result = cursor.fetchall()
+                    self.tableWidget_2.setRowCount(0)
+                    for row_Number, row_data in enumerate(result):
+                            self.tableWidget_2.insertRow(row_Number)
+                            for column_Number, data in enumerate(row_data):
+                                    self.tableWidget_2.setItem(row_Number, column_Number, QTableWidgetItem(str(data)))
+
+
+            except mc.Error as e:
+                    traceback.print_exc()
+
+----------------------------------------------------------------------------------------------------------------------------------
+  def property(self):
+            # self.ui = Agentoffice_MainWindow()
+            area = str(self.lineEdit.text())
+            print(area)  # input
+            try:
+                    mydb = mc.connect(
+                            host="localhost",
+                            user="root",
+                            password="Yash@2914",
+                            database="dbms_project"
+                    )
+                    cursor = mydb.cursor()
+                    query = "SELECT p.p_id, p.p_type,p.size, p.Address_line_1, p.Address_line_2, Address_line_3, p.selling_price, p.renting_price from property as p where (mode like 'S' or mode like 'R' or mode like 'SR') and Address_line_3 like '" + area + "'"
+                    query2 = "SELECT p.p_id, st.buyer_id, p.p_type, p.address_line_1, p.address_line_2, p.address_line_3, st.date, p.price , p.mode from property as p join status as st where p.p_id=st.p_id" ;
+                    cursor.execute(query)
+                    result = cursor.fetchall()
+                    self.tableWidget.setRowCount(0)
+                    for row_Number, row_data in enumerate(result):
+                            self.tableWidget.insertRow(row_Number)
+                            for column_Number, data in enumerate(row_data):
+                                    self.tableWidget.setItem(row_Number, column_Number, QTableWidgetItem(str(data)))
+                    cursor.execute(query2)
+                    result2 = cursor.fetchall()
+                    self.tableWidget_2.setRowCount(0)
+                    for row_Number, row_data in enumerate(result2):
+                            self.tableWidget_2.insertRow(row_Number)
+                            for column_Number, data in enumerate(row_data):
+                                    self.tableWidget_2.setItem(row_Number, column_Number, QTableWidgetItem(str(data)))
+
+
+            except mc.Error as e:
+                    traceback.print_exc()
+---------------------------------------------------------------------------------------------------------------------------------
+
+    def property_dialog(self):
+                self.dialog = QDialog()
+                self.UI = Property_Dialog()
+                self.UI.setupUi(self.dialog)
+                self.dialog.show()
+                self.UI.pushButton.clicked.connect(self.UI.property)
+                ------------------------------------------------------------------
+
+                from PyQt5.QtWidgets import QTableWidgetItem
+import mysql.connector as mc
+import traceback
+
+-------------------------------------------------------------------------------------------------------------
+import mysql.connector as mc
+import traceback
+  def register(self,userID):
+
+        name = self.lineEdit.text()
+        contact = self.lineEdit_2.text()
+        if self.radioButton.isChecked():
+                mode = "SOLD"
+        else:
+                mode = "Rented"
+        email_id = self.lineEdit_3.text()
+        address_line_1 = self.lineEdit_4.text()
+        address_line_2 = self.lineEdit_5.text()
+        address_line_3 = self.lineEdit_6.text()
+        p_id = self.lineEdit_7.text()
+        buyer_id = self.lineEdit_8.text()
+        date = self.lineEdit_9.text()
+
+        try:
+             mydb = mc.connect(
+                host="localhost",
+                user="root",
+                password="Yash@2914",
+                database="dbms_project"
+                )
+             cursor=mydb.cursor()
+             emp_id = userID#{5, 7, 13, 17, 18, 21, 28, 30, 31, 33, 35, 37, 38, 39, 40}
+             # emp_id = random.choice(list(agent_id))
+             query_add_buyer = "INSERT INTO buyer (emp_id,name,email_id,contact,address_line_1,address_line_2,address_line_3) VALUES ({emp_id}, {name}, {email_id}, {contact},{address_line_1},{address_line_2},{address_line_3})"
+             cursor.execute(query_add_buyer)
+             mydb.commit()
+
+             query_update_mode = "UPDATE property SET mode = {mode} WHERE p_id = {p_id}"
+             cursor.execute(query_update_mode)
+             mydb.commit()
+
+             query_add_status = "INSERT INTO status (p_id, buyer_id, emp_ID_buyer, date) VALUES ({p_id}, {buyer_id}, {agent_id}, {date})"
+             cursor.execute(query_add_status)
+             if cursor.rowcount > 0:
+                    self.label_16 = QtWidgets.QLabel(Frame)
+                    self.label_16.setGeometry(QtCore.QRect(690, 670, 55, 16))
+                    self.label_16.setText("")
+                    self.label_16.setObjectName("label_16")
+                    self.label_16.setText("Registration successfull")
+             else:
+                    self.label_16 = QtWidgets.QLabel(Frame)
+                    self.label_16.setGeometry(QtCore.QRect(690, 670, 55, 16))
+                    self.label_16.setText("")
+                    self.label_16.setObjectName("label_16")
+                    self.label_16.setText("Try again!")
+             mydb.commit()
+
+        except mc.Error as e:
+                traceback.print_exc()
+
+ ------------------------------------------
+                -------------------------------------------------------------------------------
+    def Agentreport(self):
+            # self.ui = Agentoffice_MainWindow()
+            agent_ID = str(self.lineEdit_agentID.text())
+            print(agent_ID)  # input
+            try:
+                    mydb = mc.connect(
+                            host="localhost",
+                            user="root",
+                            password="Yash@2914",
+                            database="dbms_project"
+                    )
+                    cursor = mydb.cursor()
+                    query = "SELECT s.emp_id, st.date, p.p_type, p.address_line_1, p.address_line_2, p.address_line_3, p.selling_price from seller as s join property as p join status as st where s.seller_id=p.seller_id and st.p_id=p.p_id and p.mode like 'Sold' and emp_id like '" + agent_ID + "'"
+                    query2 = "SELECT s.emp_id, st.date, p.p_type, p.address_line_1, p.address_line_2, p.address_line_3, p.renting_price from seller as s join property as p join status as st where s.seller_id=p.seller_id and st.p_id=p.p_id and p.mode like 'Rented' and emp_id like '" + agent_ID + "'"
+                    cursor.execute(query)
+                    result = cursor.fetchall()
+                    self.agentreport.setRowCount(0)
+                    for row_Number, row_data in enumerate(result):
+                            self.agentreport.insertRow(row_Number)
+                            for column_Number, data in enumerate(row_data):
+                                    self.agentreport.setItem(row_Number, column_Number, QTableWidgetItem(str(data)))
+
+                    cursor.execute(query2)
+                    result = cursor.fetchall()
+                    self.tableWidget_2.setRowCount(0)
+                    for row_Number, row_data in enumerate(result):
+                            self.tableWidget_2.insertRow(row_Number)
+                            for column_Number, data in enumerate(row_data):
+                                    self.tableWidget_2.setItem(row_Number, column_Number, QTableWidgetItem(str(data)))
+
+
+            except mc.Error as e:
+                    traceback.print_exc()
+import mysql.connector as mc
+import traceback
+--------------------------------------------------------------------------
+    def upload(self):
+        name = self.lineEdit_5.text()
+        contact = self.lineEdit_6.text()
+        email_id = self.lineEdit_14.text()
+        address_line_1 = self.lineEdit_4.text()
+        address_line_2 = self.lineEdit_5.text()
+        address_line_3 = self.lineEdit_6.text()
+        emp_id = self.userID
+        try:
+                mydb = mc.connect(
+                        host="localhost",
+                        user="root",
+                        password="Yash@2914",
+                        database="dbms_project"
+                )
+                query_add_seller = "INSERT INTO seller (emp_id,name,email_id,contact,address_line_1,address_line_2,address_line_3) VALUES ({emp_id}, {name}, {email_id}, {contact},{address_line_1},{address_line_2},{address_line_3})"
+                cursor=mydb.cursor()
+                cursor.execute(query_add_seller)
+
+                seller_id = cursor.lastrowid
+        # Connect the currentIndexChanged signal to the onActivated method
+
+                mode=""
+                if self.radioButton_4.isChecked():
+                   mode = "S"
+                if self.radioButton_5.isChecked():
+                   mode = "R"
+                if self.radioButton_6.isChecked():
+                   mode = "SR"
+
+                address_line_1 = self.lineEdit_9.text()
+                address_line_2 = self.lineEdit_10.text()
+                address_line_3 = self.lineEdit_11.text()
+                renting_price = self.lineEdit_3.text()
+                selling_price = self.lineEdit_12.text()
+
+                size = self.lineEdit_19.text()
+                date = self.lineEdit_21.text()
+                p_type = self.lineEdit_4.text()
+
+                query_add_property = "INSERT INTO property (seller_id,date_of_reg,address_line_1,address_line_2,address_line_3,mode,renting_price,selling_price,year_of_construction,size,p_type) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                values = (
+                seller_id,
+                date,
+                address_line_1,
+                address_line_2,
+                address_line_3,
+                mode,
+                renting_price,
+                selling_price,
+                year,
+                size,
+                p_type,
+                )
+                cursor.execute(query_add_property, values)
+
+                if cursor.rowcount > 0:
+
+                        self.label_39.setText("Registration successfull")
+                else:
+
+                        self.label_39.setText("Try again!")
+                mydb.commit()
+
+
+
+        except mc.Error as e:
+            traceback.print_exc()
+
+
+    def onActivated(self, index):
+        # Get the selected item and display it in the label
+        text = self.comboBox_2.itemText(index)
+        self.label.setText(text)
+
+        def modify_year():
+                global global_var
+                global_var = text
+
+        modify_year(text)
+        --------------------------------
+         agent_id= ""
+
+    def __init__(self, x):
+                self.agent_id = x
+                ------------------------------
+                year=""
+from PyQt5 import QtCore, QtGui, QtWidgets
+import mysql.connector as mc
+import traceback
+
+------------------------------------------------------------------------------
+  def Agentreport(self):
+            agent_id = str(self.lineEdit_agentID.text())
+            # self.ui = Agentoffice_MainWindow()
+            print(agent_id)  # input
+            try:
+                    mydb = mc.connect(
+                            host="localhost",
+                            user="root",
+                            password="Yash@2914",
+                            database="dbms_project"
+                    )
+                    cursor = mydb.cursor()
+                    query = "SELECT s.emp_id, st.date, p.p_type, p.address_line_1, p.address_line_2, p.address_line_3, p.selling_price from seller as s join property as p join status as st where s.seller_id=p.seller_id and st.p_id=p.p_id and p.mode like 'Sold' and emp_id like '" + agent_id + "'"
+                    query2 = "SELECT s.emp_id, st.date, p.p_type, p.address_line_1, p.address_line_2, p.address_line_3, p.renting_price from seller as s join property as p join status as st where s.seller_id=p.seller_id and st.p_id=p.p_id and p.mode like 'Rented' and emp_id like '" + agent_id + "'"
+                    cursor.execute(query)
+                    result = cursor.fetchall()
+                    self.agentreport.setRowCount(0)
+                    for row_Number, row_data in enumerate(result):
+                            self.agentreport.insertRow(row_Number)
+                            for column_Number, data in enumerate(row_data):
+                                    self.agentreport.setItem(row_Number, column_Number, QTableWidgetItem(str(data)))
+
+                    cursor.execute(query2)
+                    result = cursor.fetchall()
+                    self.tableWidget_2.setRowCount(0)
+                    for row_Number, row_data in enumerate(result):
+                            self.tableWidget_2.insertRow(row_Number)
+                            for column_Number, data in enumerate(row_data):
+                                    self.tableWidget_2.setItem(row_Number, column_Number, QTableWidgetItem(str(data)))
+
+            except mc.Error as e:
+                    traceback.print_exc()
+
+    def agent_dialog(self):
+            self.dialog = QDialog()
+            self.UI = Agent_Dialog()
+            self.UI.setupUi(self.dialog)
+            self.dialog.show()
+            try:
+                            mydb = mc.connect(
+                                    host="localhost",
+                                    user="root",
+                                    password="Yash@2914",
+                                    database="dbms_project"
+                            )
+                            cursor = mydb.cursor()
+                            query = "SELECT * from employee where designation = 'Agent'"
+                            cursor.execute(query)
+                            result = cursor.fetchall()
+                            self.UI.tableWidget.setRowCount(0)
+                            for row_Number, row_data in enumerate(result):
+                                    self.UI.tableWidget.insertRow(row_Number)
+                                    for column_Number, data in enumerate(row_data):
+                                            self.UI.tableWidget.setItem(row_Number, column_Number,
+                                                                     QTableWidgetItem(str(data)))
+
+            except mc.Error as e:
+                            traceback.print_exc()
+                            frame agentoffice
+------------------------------------------------------------------
+import mysql.connector as mc
+import traceback
+
+from agentdialog import Agent_Dialog
+------------------------------------------------------------------
+ def property_dialog(self):
+        self.dialog = QDialog()
+        self.UI = Property_Dialog()
+        self.UI.setupUi(self.dialog)
+        self.dialog.show()
+        self.UI.pushButton.clicked.connect(self.UI.property)
+
+    def buyer_frame(self):
+        self.frame = QFrame()
+        self.UI = Buyer_Frame(self.userID)
+        self.UI.setupUi(self.frame)
+        self.frame.show()
+        self.UI.pushButton.clicked.connect(self.UI.register)
+
+    def seller_frame(self):
+        self.tab = QTabWidget()
+        self.UI = seller_TabWidget(self.userID)
+        self.UI.setupUi(self.tab)
+        self.tab.show()
+        self.UI.pushButton_14.clicked.connect(self.UI.upload)
+        self.UI.comboBox_2.currentIndexChanged.connect(self.UI.onActivated)
+
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QDialog, QFrame, QTabWidget
+
+from frameseller import seller_TabWidget
+from property_dialog import Property_Dialog
+from framebuyer import Buyer_Frame
+
+
+

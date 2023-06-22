@@ -1,0 +1,19 @@
+<RCC>
+  <qresource prefix="images">
+    <file>background.jpeg</file>
+    <file>property sell.jpeg</file>
+    <file>icons8-list-64.png</file>
+    <file>customer-service.png</file>
+    <file>present.png</file>
+    <file>profile.png</file>
+    <file>signboard.png</file>
+  </qresource>
+  <qresource prefix="removed backgroound">
+    <file>houseon_rent-removebg-preview.png</file>
+    <file>property_sell-removebg-preview.png</file>
+    <file>realtor_02-removebg-preview.png</file>
+    <file>realtor-removebg-preview.png</file>
+    <file>tree_branch-removebg-preview.png</file>
+    <file>urban_landscape-removebg-preview.png</file>
+  </qresource>
+</RCC>

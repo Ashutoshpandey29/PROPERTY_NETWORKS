@@ -1,0 +1,1065 @@
+CREATE DATABASE dbms_project;
+USE dbms_project;
+CREATE TABLE
+    login_details (
+        emp_id INT PRIMARY KEY AUTO_INCREMENT,
+        password VARCHAR(50)
+    );
+
+CREATE TABLE
+    employee (
+        emp_id INT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(50),
+        designation VARCHAR(50),
+        email_id VARCHAR(50),
+        contact VARCHAR(10),
+        address_line_1 VARCHAR(50),
+        address_line_2 VARCHAR(50),
+        address_line_3 VARCHAR(50),
+        FOREIGN KEY (emp_id) REFERENCES login_details(emp_id)
+    );
+
+CREATE TABLE
+    buyer (
+        buyer_id INT PRIMARY KEY AUTO_INCREMENT,
+        emp_id INT,
+        name VARCHAR(50),
+        email_id VARCHAR(50),
+        contact VARCHAR(10),
+        address_line_1 VARCHAR(50),
+        address_line_2 VARCHAR(50),
+        address_line_3 VARCHAR(50),
+        FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+    );
+
+CREATE TABLE
+    seller(
+        seller_id INT Primary Key Auto_increment,
+        emp_id INT,
+        name VARCHAR(50),
+        email_id VARCHAR(50),
+        contact VARCHAR(10),
+        address_line_1 VARCHAR(50),
+        address_line_2 VARCHAR(50),
+        address_line_3 VARCHAR(50),
+        FOREIGN KEY (emp_id) REFERENCES employee(emp_id)
+    );
+
+CREATE TABLE
+    property(
+        p_id INT PRIMARY KEY AUTO_INCREMENT,
+        seller_id INT,
+        date_of_reg date,
+        address_line_1 VARCHAR(50),
+        address_line_2 VARCHAR(50),
+        address_line_3 VARCHAR(50),
+        mode VARCHAR(20),
+        renting_price NUMERIC(12, 2),
+        selling_price NUMERIC(12, 2),
+        year_of_construction INT,
+        size VARCHAR(10),
+        p_type VARCHAR(10),
+        FOREIGN KEY (seller_id) REFERENCES seller(seller_id)
+    );
+
+CREATE TABLE
+    status(
+        p_id INT,
+        buyer_id INT,
+        emp_ID_buyer INT,
+        date Date,
+        time VARCHAR(100),
+        FOREIGN KEY (buyer_id) REFERENCES buyer(buyer_id),
+        FOREIGN KEY (emp_ID_buyer) REFERENCES buyer(emp_id),
+        FOREIGN KEY (p_id) REFERENCES property(p_id),
+        PRIMARY KEY(p_id, buyer_id)
+    );
+
+-- Sample data for login_details table
+INSERT INTO
+   login_details (emp_id, password) 
+VALUES
+   (
+      1, 'pass123'
+   )
+, 
+   (
+      2, 'password456'
+   )
+, 
+   (
+      3, 'secret789'
+   )
+, 
+   (
+      4, 'mypassword'
+   )
+, 
+   (
+      5, 'letmein'
+   )
+, 
+   (
+      6, 'test123'
+   )
+, 
+   (
+      7, 'test456'
+   )
+, 
+   (
+      8, 'test789'
+   )
+, 
+   (
+      9, 'test1234'
+   )
+, 
+   (
+      10, 'test5678'
+   )
+, 
+   (
+      11, 'test9012'
+   )
+, 
+   (
+      12, 'test3456'
+   )
+, 
+   (
+      13, 'test7890'
+   )
+, 
+   (
+      14, 'test12345'
+   )
+, 
+   (
+      15, 'test67890'
+   )
+, 
+   (
+      16, 'testabcde'
+   )
+, 
+   (
+      17, 'testfghij'
+   )
+, 
+   (
+      18, 'testklmno'
+   )
+, 
+   (
+      19, 'testpqrs'
+   )
+, 
+   (
+      20, 'testuvwxy'
+   )
+, 
+   (
+      21, 'testz123'
+   )
+, 
+   (
+      22, 'test4567'
+   )
+, 
+   (
+      23, 'test8901'
+   )
+, 
+   (
+      24, 'test2345'
+   )
+, 
+   (
+      25, 'test6789'
+   )
+, 
+   (
+      26, 'test0123'
+   )
+, 
+   (
+      27, 'test45678'
+   )
+, 
+   (
+      28, 'test90123'
+   )
+, 
+   (
+      29, 'test34567'
+   )
+, 
+   (
+      30, 'test78901'
+   )
+, 
+   (
+      31, 'test123456'
+   )
+, 
+   (
+      32, 'test789012'
+   )
+, 
+   (
+      33, 'test345678'
+   )
+, 
+   (
+      34, 'test901234'
+   )
+, 
+   (
+      35, 'test567890'
+   )
+, 
+   (
+      36, 'testabcdef'
+   )
+, 
+   (
+      37, 'testghijkl'
+   )
+, 
+   (
+      38, 'testmnopqr'
+   )
+, 
+   (
+      39, 'teststuvwx'
+   )
+, 
+   (
+      40, 'testyz1234'
+   )
+,
+	(41,'testusaiu37')
+   
+;
+   
+
+-- Agents are : [5,7,13,17,18,21,28,30,31,33,35,37,38,39,40] ....total 15 agents
+-- Sample data for employee table
+INSERT INTO
+   employee ( emp_id, designation, name, email_id, contact, address_line_1, address_line_2, address_line_3 ) 
+VALUES
+   (
+      1, 'Manager', 'Amit Kumar', 'amit.kumar@gmail.com', 8455959848, '123, Main Road', 'Gandhi Nagar', 'West Delhi' 
+   )
+, 
+   (
+      2, 'Worker', 'Rahul Singh', 'rahul.singh@gmail.com', 8455959845, '456, Park Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      3, 'Employee', 'Sachin Gupta', 'sachin.gupta@gmail.com', 8478559848, '789, Kaveri Nagar', 'Whitefield', 'East Delhi' 
+   )
+, 
+   (
+      4, 'Worker', 'Ayesha Khan', 'ayesha.khan@gmail.com', 8453199848, '345, Gali No. 3', 'Chandni Chowk', 'North Delhi' 
+   )
+, 
+   (
+      5, 'Agent', 'Ravi Sharma', 'ravi.sharma@gmail.com', 8537959848, '567, Jawahar Nagar', 'Tonk Road', 'West Delhi' 
+   )
+, 
+   (
+      6, 'Employee', 'Geeta Kumari', 'geeta.kumari@gmail.com', 9455459848, '901, Shanti Vihar', 'Shahdara', 'East Delhi' 
+   )
+, 
+   (
+      7, 'Agent', 'Vikas Singh', 'vikas.singh@gmail.com', 9455459848, '234, Keshav Nagar', 'Munirka', 'South Delhi' 
+   )
+, 
+   (
+      8, 'Manager', 'Rajeev Sharma', 'rajeev.sharma@gmail.com', 9455452158, '678, Anand Vihar', 'Mayur Vihar', 'East Delhi' 
+   )
+, 
+   (
+      9, 'Worker', 'Anjali Gupta', 'anjali.gupta@gmail.com', 9362459848, '123, Toli Chowki', 'Banjara Hills', 'West Delhi' 
+   )
+, 
+   (
+      10, 'Employee', 'Suresh Patel', 'suresh.patel@gmail.com', 9485159848, '456, Nana Chowk', 'Grant Road', 'South Delhi' 
+   )
+, 
+   (
+      11, 'Cashier', 'Priya Verma', 'priya.verma@gmail.com', 9475459848, '789, Tilak Nagar', 'Janakpuri', 'West Delhi' 
+   )
+, 
+   (
+      12, 'Cashier', 'Sanjay Singh', 'sanjay.singh@gmail.com', 9459848963, '345, Rajendra Nagar', 'Rajendra Place', 'Central Delhi' 
+   )
+, 
+   (
+      13, 'Agent', 'Divya Sharma', 'divya.sharma@gmail.com', 9125459848, '567, Sector 22', 'Noida', 'East Delhi' 
+   )
+, 
+   (
+      14, 'Loan', 'Alok Kumar', 'alok.kumar@gmail.com', 9125455548, '901, Paschim Vihar', 'Peeragarhi', 'West Delhi' 
+   )
+, 
+   (
+      15, 'Worker', 'Neha Singh', 'neha.singh@gmail.com', 9125452348, '234, Lajpat Nagar', 'Lajpat Nagar', 'South Delhi' 
+   )
+, 
+   (
+      16, 'Manager', 'Rahul Gupta', 'rahul.gupta@gmail.com', 9123219848, '678, Saket', 'Saket', 'South Delhi' 
+   )
+, 
+   (
+      17, 'Agent', 'Amita Sharma', 'amita.sharma@gmail.com', 9125499848, '123, Gomti Nagar', 'Gomti Nagar', 'East Delhi' 
+   )
+, 
+   (
+      18, 'Agent', 'Nitin Patel', 'nitin.patel@gmail.com', 9455459848, '456, Shivaji Nagar', 'Model Colony', 'West Delhi' 
+   )
+, 
+   (
+      19, 'Cashier', 'Shikha Singh', 'shikha.singh@gmail.com', 9125874848, '789, DLF Phase 1', 'Sector 26', 'Delhi' 
+   )
+, 
+   (
+      20, 'Loan', 'Rohit Gupta', 'rohit.gupta@gmail.com', 9165459848, '345, Navrangpura', 'Navrangpura', 'West Delhi' 
+   )
+, 
+   (
+      21, 'Agent', 'Pooja Sharma', 'pooja.sharma@gmail.com', 9125321848, '567, Koregaon Park', 'Koregaon Park', 'East Delhi' 
+   )
+, 
+   (
+      22, 'Worker', 'Alok Singh', 'alok.singh@gmail.com', 9112989848, '901, Sector 15', 'Sector 15', 'Delhi' 
+   )
+, 
+   (
+      23, 'Worker', 'Ramesh Patel', 'ramesh.patel@gmail.com', 9125471848, '234, Model Town', 'Model Town', 'North Delhi' 
+   )
+, 
+   (
+      24, 'Employee', 'Anita Verma', 'anita.verma@gmail.com', 9125324548, '678, Tarnaka', 'Tarnaka', 'East Delhi' 
+   )
+, 
+   (
+      25, 'Cashier', 'Amitabh Singh', 'amitabh.singh@gmail.com', 9125454898, '123, DLF Phase 2', 'Sector 25', 'Delhi' 
+   )
+, 
+   (
+      26, 'Employee', 'Sunita Kumari', 'sunita.kumari@gmail.com', 9167859848, '456, IT Park', 'Viman Nagar', 'East Delhi' 
+   )
+, 
+   (
+      27, 'Cashier', 'Ravi Kumar', 'ravi.kumar@gmail.com', 9274459848, '789, Anna Nagar', 'Anna Nagar', 'North Delhi' 
+   )
+, 
+   (
+      28, 'Agent', 'Kiran Singh', 'kiran.singh@gmail.com', 9165459848, '345, Vijay Nagar', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      29, 'Loan', 'Rahul Sharma', 'rahul.sharma@gmail.com', 9123456848, '567, Electronics City', 'Electronics City', 'South Delhi' 
+   )
+, 
+   (
+      30, 'Agent', 'Anita Gupta', 'anita.gupta@gmail.com', 9179569848, '901, Prashant Vihar', 'Pitampura', 'North Delhi' 
+   )
+, 
+   (
+      31, 'Agent', 'Sachin Singh', 'sachin.singh@gmail.com', 9125434548, '234, Garia', 'Garia', 'Delhi' 
+   )
+, 
+   (
+      32, 'Cashier', 'Rohini Sharma', 'rohini.sharma@gmail.com', 9165239848, '678, Sion', 'Sion', 'Central Delhi' 
+   )
+, 
+   (
+      33, 'Agent', 'Sandeep Verma', 'sandeep.verma@gmail.com', 9162589848, '123, Kalina', 'Kalina', 'North Delhi' 
+   )
+, 
+   (
+      34, 'Employee', 'Kavita Kumari', 'kavita.kumari@gmail.com', 9165456848, '456, Sahakar Nagar', 'Sahakar Nagar', 'West Delhi' 
+   )
+, 
+   (
+      35, 'Agent', 'Anjali Singh', 'anjali.singh@gmail.com', 9165237538, '789, Ramapuram', 'Ramapuram', 'West Delhi' 
+   )
+, 
+   (
+      36, 'Loan', 'Rahul Verma', 'rahul.verma@gmail.com', 9874239848, '345, Sector 49', 'Sector 49', 'Delhi' 
+   )
+, 
+   (
+      37, 'Agent', 'Neha Kumari', 'neha.kumari@gmail.com', 9856239848, '567, Gachibowli', 'Gachibowli', 'South Delhi' 
+   )
+, 
+   (
+      38, 'Agent', 'Arun Kumar', 'arun.kumar@gmail.com', 9874239758, '901, Mahim', 'Mahim', 'North Delhi' 
+   )
+, 
+   (
+      39, 'Agent', 'Kavita Singh', 'kavita.singh@gmail.com', 9871539848, '234, Kalkaji', 'Kalkaji', 'South Delhi' 
+   )
+, 
+   (
+      40, 'Agent', 'Abhishek Verma', 'abhishek.verma@gmail.com', 9874245878, '678, Nungambakkam', 'Nungambakkam', 'Central Delhi' 
+   ),
+   (41, 'Agent', 'Kabir Singh', 'kabir.singh@gmail.com', 8584536483, '2314, Kalkamraji', 'Kalkamraji', 'North Delhi' 
+)
+;
+
+-- Sample data for buyer table
+INSERT INTO
+   buyer ( buyer_id, emp_id, name, email_id, contact, address_line_1, address_line_2, address_line_3 ) 
+VALUES
+   (
+      1000, 5, 'Rahul Sharma', 'rahulsharma@gmail.com', '9876543210', '23 Main Street', 'Sector 4', 'Delhi' 
+   )
+;
+INSERT INTO
+   buyer ( name, emp_id, email_id, contact, address_line_1, address_line_2, address_line_3 ) 
+VALUES
+   (
+      'Aarti Patel', 7, 'aartipatel@gmail.com', '9876543211', '12A Block A', 'South Extension 2', 'South Delhi' 
+   )
+, 
+   (
+      'Suresh Menon', 39, 'sureshmenon@gmail.com', '9876543212', 'Flat 1203', 'Tower C', 'West Delhi' 
+   )
+, 
+   (
+      'Anjali Desai', 21, 'anjalidesai@gmail.com', '9876543213', '45/2A', 'Old Rajendra Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Karthik Reddy', 7, 'karthikreddy@gmail.com', '9876543214', '203, Lake View Apartments', 'Banjara Hills', 'Central Delhi' 
+   )
+, 
+   (
+      'Vidya Rao', 28, 'vidyarao@gmail.com', '9876543215', '18/3', 'Sector 3', 'North Delhi' 
+   )
+, 
+   (
+      'Rajiv Chopra', 17, 'rajivchopra@gmail.com', '9876543216', 'A-12', 'Lajpat Nagar', 'South Delhi' 
+   )
+, 
+   (
+      'Neeraj Agarwal', 30, 'neerajagarwal@gmail.com', '9876543217', '123/5', 'MG Road', 'East Delhi' 
+   )
+, 
+   (
+      'Shweta Kumar', 13, 'shwetakumar@gmail.com', '9876543218', 'Flat 1802', 'Tower B', 'Delhi' 
+   )
+, 
+   (
+      'Manoj Singh', 18, 'manojsingh@gmail.com', '9876543219', '35', 'Nehru Place', 'Central Delhi' 
+   )
+, 
+   (
+      'Deepa Nair', 30, 'deepanair@gmail.com', '9876543220', '2/3', 'Vasant Vihar', 'Delhi' 
+   )
+, 
+   (
+      'Rajesh Gupta', 31, 'rajeshgupta@gmail.com', '9876543221', '87/2', 'Sohna Road', 'South Delhi' 
+   )
+, 
+   (
+      'Anand Swamy', 35, 'anandswamy@gmail.com', '9876543222', 'Flat 405', 'Tower D', 'Central Delhi' 
+   )
+, 
+   (
+      'Priya Patel', 40, 'priyapatel@gmail.com', '9876543223', 'B-15', 'Goregaon West', 'Delhi' 
+   )
+, 
+   (
+      'Vivek Sharma', 31, 'viveksharma@gmail.com', '9876543224', '2/5', 'Dwarka', 'West Delhi' 
+   )
+, 
+   (
+      'Sneha Gupta', 35, 'snehagupta@gmail.com', '9876543225', '27', 'Safdarjung Enclave', 'Delhi' 
+   )
+, 
+   (
+      'Rajat Chopra', 5, 'rajatchopra@gmail.com', '9876543226', 'Flat 302', 'Dwarka', 'South Delhi' 
+   )
+, 
+   (
+      'Amit Singh', 13, 'amitsingh@gmail.com', '9876543227', '456', 'Koramangala', 'North Delhi' 
+   )
+, 
+   (
+      'Pooja Verma', 28, 'poojaverma@gmail.com', '9876543228', 'Flat 1201', 'Tower A', 'Delhi' 
+   )
+, 
+   (
+      'Rohit Mehta', 30, 'rohitmehta@gmail.com', '9876543229', '28', 'South City 1', 'South Delhi' 
+   )
+, 
+   (
+      'Seema Gupta', 13, 'seemagupta@gmail.com', '9876543230', '44/2', 'Defence Colony', 'Delhi' 
+   )
+, 
+   (
+      'Siddharth Pai', 21, 'siddharthpai@gmail.com', '9876543231', '1205', 'Golden Grand', 'East Delhi' 
+   )
+, 
+   (
+      'Geeta Sharma', 31, 'geetasharma@gmail.com', '9876543232', 'Flat 304', 'Tower B', 'West Delhi' 
+   )
+, 
+   (
+      'Alok Deshpande', 33, 'alokdeshpande@gmail.com', '9876543233', '67/2', 'MG Road', 'North Delhi' 
+   )
+, 
+   (
+      'Swati Shah', 35, 'swatishah@gmail.com', '9876543234', '16', 'Koregaon Park', 'North Delhi' 
+   )
+, 
+   (
+      'Sanjay Kumar', 39, 'sanjaykumar@gmail.com', '9876543235', 'Flat 502', 'Tower A', 'South Delhi' 
+   )
+, 
+   (
+      'Kavita Rao', 18, 'kavitarao@gmail.com', '9876543236', '56', 'Lajpat Nagar', 'Delhi' 
+   )
+, 
+   (
+      'Amitabh Singh', 5, 'amitabhsingh@gmail.com', '9876543237', 'B-302', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Nidhi Gupta', 40, 'nidhigupta@gmail.com', '9876543238', '21/2', 'South Extension 1', 'Delhi' 
+   )
+, 
+   (
+      'Rahul Joshi', 35, 'rahuljoshi@gmail.com', '9876543239', 'Flat 1501', 'Tower C', 'North Delhi' 
+   )
+, 
+   (
+      'Shalini Singh', 7, 'shalinisingh@gmail.com', '9876543240', '34', 'Vasant Kunj', 'New Delhi' 
+   )
+, 
+   (
+      'Ajay Kumar', 13, 'ajaykumar@gmail.com', '9876543241', '1203', 'Lake Homes', 'Delhi' 
+   )
+, 
+   (
+      'Kiran Patel', 18, 'kiranpatel@gmail.com', '9876543242', '6/2', 'Golf Course Road', 'Delhi' 
+   )
+, 
+   (
+      'Neha Gupta', 35, 'nehagupta@gmail.com', '9876543243', 'Flat 2001', 'Tower B', 'East Delhi' 
+   )
+, 
+   (
+      'Alok Gupta', 5, 'alokgupta@gmail.com', '9876543240', '45', 'Nehru Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Neha Singh', 17, 'nehasingh@gmail.com', '9876543241', 'Flat 202', 'Tower E', 'Central Delhi' 
+   )
+, 
+   (
+      'Rahul Choudhary', 30, 'rahulchoudhary@gmail.com', '9876543242', '43', 'Kalkaji', 'Delhi' 
+   )
+, 
+   (
+      'Anita Sharma', 18, 'anitasharma@gmail.com', '9876543243', 'Flat 304', 'Tower A', 'West Delhi' 
+   )
+, 
+   (
+      'Amit Kumar', 7, 'amitkumar@gmail.com', '9876543244', '16/1', 'Vasant Kunj', 'Delhi' 
+   )
+, 
+   (
+      'Mukesh Patel', 30, 'mukeshpatel@gmail.com', '9876543245', '23', 'South Avenue', 'South Delhi' 
+   )
+;
+-- Sample data for seller table
+INSERT INTO
+   seller ( emp_id, seller_id, name, email_id, contact, address_line_1, address_line_2, address_line_3 ) 
+VALUES
+   (
+      40, 2000, 'John', 'john@gmail.com', '9876543210', '1st Street', 'T Nagar', 'Delhi' 
+   )
+;
+   
+INSERT INTO
+   seller ( name, emp_id, email_id, contact, address_line_1, address_line_2, address_line_3 ) 
+VALUES
+   (
+      'Raj', 5, 'raj@gmail.com', '9876543211', '2nd Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Priya', 31, 'priya@yahoo.com', '9876543212', '3rd Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Amit', 39, 'amit@yahoo.com', '9876543213', '4th Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Suresh', 21, 'suresh@gmail.com', '9876543214', '5th Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Ravi', 7, 'ravi@gmail.com', '9876543215', '6th Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Sandeep', 13, 'sandeep@yahoo.com', '9876543216', '7th Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Shiva', 30, 'shiva@yahoo.com', '9876543217', '8th Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Arun', 33, 'arun@gmail.com', '9876543218', '9th Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Krishna', 17, 'krishna@gmail.com', '9876543219', '10th Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Neha', 5, 'neha@yahoo.com', '9876543220', '11th Street', 'Vijay Nagar', 'North Delhi' 
+   )
+, 
+   (
+      'Rakesh', 17, 'rakesh@gmail.com', '9876543221', '12th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Anita', 28, 'anita@gmail.com', '9876543222', '13th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Vikram', 35, 'vikram@yahoo.com', '9876543223', '14th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Sita', 40, 'sita@yahoo.com', '9876543224', '15th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Rajesh', 38, 'rajesh@gmail.com', '9876543225', '16th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Pooja', 18, 'pooja@gmail.com', '9876543226', '17th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Aakash', 5, 'aakash@yahoo.com', '9876543227', '18th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Gita', 39, 'gita@yahoo.com', '9876543228', '19th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Jyoti', 39, 'jyoti@gmail.com', '9876543230', '20th Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Rohit', 13, 'rohit@gmail.com', '9876543231', '21st Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Suman', 37, 'suman@yahoo.com', '9876543232', '22nd Street', 'MG Road', 'South Delhi' 
+   )
+, 
+   (
+      'Kamal', 17, 'kamal@yahoo.com', '9876543233', '23rd Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Sangeeta', 28, 'sangeeta@gmail.com', '9876543234', '24th Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Shankar', 33, 'shankar@gmail.com', '9876543235', '25th Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Mohan', 13, 'mohan@yahoo.com', '9876543236', '26th Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Anjali', 38, 'anjali@yahoo.com', '9876543237', '27th Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Avinash', 5, 'avinash@gmail.com', '9876543238', '28th Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Neetu', 18, 'neetu@gmail.com', '9876543239', '29th Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Naveen', 7, 'naveen@yahoo.com', '9876543240', '30th Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Priyanka', 30, 'priyanka@gmail.com', '9876543241', '31st Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Aman', 18, 'aman@gmail.com', '9876543242', '32nd Street', 'Raheja Residency', 'South Delhi' 
+   )
+, 
+   (
+      'Preeti', 17, 'preeti@yahoo.com', '9876543243', '33rd Street', 'Sector 18', 'West Delhi' 
+   )
+, 
+   (
+      'Ankur', 39, 'ankur@yahoo.com', '9876543244', '34th Street', 'Sector 18', 'West Delhi' 
+   )
+, 
+   (
+      'Deepak', 5, 'deepak@gmail.com', '9876543245', '35th Street', 'Sector 18', 'West Delhi' 
+   )
+, 
+   (
+      'Sarika', 21, 'sarika@gmail.com', '9876543246', '36th Street', 'Sector 18', 'West Delhi' 
+   )
+, 
+   (
+      'Ashish', 40, 'ashish@yahoo.com', '9876543247', '37th Street', 'Sector 18', 'West Delhi' 
+   )
+, 
+   (
+      'Surbhi', 7, 'surbhi@yahoo.com', '9876543248', '38th Street', 'Sector 18', 'West Delhi' 
+   )
+, 
+   (
+      'Neha', 28, 'neha@yahoo.com', '9876543250', '40th Street', 'Sector 18', 'West Delhi' 
+   )
+, 
+   (
+      'Rajesh', 5, 'rajesh@gmail.com', '9876543251', '41st Street', 'Sector 18', 'West Delhi' 
+   )
+;
+INSERT INTO
+   seller ( emp_id, seller_id, name, email_id, contact, address_line_1, address_line_2, address_line_3 ) 
+VALUES(
+      41,3799 ,'Rajeev', 'rajeev@gmail.com', '9876556471', '1st Street', 'Vijayas Nagar', 'South Delhi' 
+   );
+
+-- Sample data for property table
+INSERT INTO
+   property ( p_id, seller_id, date_of_reg, address_line_1, address_line_2, address_line_3, mode, renting_price, selling_price, year_of_construction, size, p_type ) 
+VALUES
+   (
+      3000, 2039, '2013-11-23', '123 ABC Colony', 'MG Road', 'South Delhi', 'S', 20000, 120000, 2010, '800 sqft', '2BHK' 
+   )
+;
+INSERT INTO
+   property ( p_id, seller_id, date_of_reg, address_line_1, address_line_2, address_line_3, mode, renting_price, selling_price, year_of_construction, size, p_type ) 
+VALUES(3050,2001,'2021-11-21','456 DEF Colony','MRP Road', 'South Delhi','R',18000,2400000,2021,'5000 sqft','3BHK');
+
+INSERT INTO
+   property ( p_id, seller_id, date_of_reg, address_line_1, address_line_2, address_line_3, mode, renting_price, selling_price, year_of_construction, size, p_type ) 
+VALUES
+(540,3799, '2023-02-28', '456 Park Ave', "Vikas Nagar", 'Los Angeles', 'Sold', 3000, 200000, 2010, '1500 sqft', 'apartment');
+select * from property where year_of_construction=2018;
+select * from property where seller_id=2000;
+INSERT INTO
+   property ( seller_id, date_of_reg, address_line_1, address_line_2, address_line_3, mode, renting_price, selling_price, year_of_construction, size, p_type ) 
+VALUES 
+
+   (
+      2000, '2018-01-02', '456 XYZ Colony', 'Vijay Nagar', 'North Delhi', 'Sold', 15000, 200000, 2018, '1000 sqft', '3BHK' 
+   )
+, 
+   (
+      2010, '2021-01-12', '789 PQR Colony', 'Raheja Residency', 'South Delhi', 'SR', 18000, 150000, 2012, '900 sqft', '1BHK' 
+   )
+, 
+   (
+      2030, '2011-09-07', '101112 MNO Colony', 'Vijay Nagar', 'North Delhi', 'S', 22000, 130000, 2011, '850 sqft', '2BHK' 
+   )
+, 
+   (
+      2001, '2015-12-12', '131415 GHI Colony', 'MG Road', 'South Delhi', 'R', 12000, 180000, 2014, '950 sqft', '3BHK' 
+   )
+, 
+   (
+      2011, '2013-05-19', '161718 JKL Colony', 'Raheja Residency', 'South Delhi', 'SR', 20000, 110000, 2013, '750 sqft', '1BHK' 
+   )
+, 
+   (
+      2021, '2016-10-20', '192021 FGH Colony', 'Sector 18', 'West Delhi', 'Sold', 23000, 125000, 2015, '800 sqft', '2BHK' 
+   )
+, 
+   (
+      2031, '2018-09-19', '222324 LMN Colony', 'Vijay Nagar', 'North Delhi', 'R', 14000, 190000, 2016, '1000 sqft', '3BHK' 
+   )
+, 
+   (
+      2002, '2015-09-29', '252627 PQR Colony', 'Raheja Residency', 'South Delhi', 'SR', 19000, 140000, 2012, '900 sqft', '1BHK' 
+   )
+, 
+   (
+      2012, '2011-03-01', '282930 STU Colony', 'MG Road', 'South Delhi', 'Sold', 21000, 135000, 2010, '850 sqft', '2BHK' 
+   )
+, 
+   (
+      2022, '2014-05-23', '313233 VWX Colony', 'Raheja Residency', 'South Delhi', 'R', 11000, 170000, 2011, '950 sqft', '3BHK' 
+   )
+, 
+   (
+      2032, '2015-06-23', '343536 YZA Colony', 'Vijay Nagar', 'North Delhi', 'SR', 17500, 100000, 2013, '750 sqft', '1BHK' 
+   )
+, 
+   (
+      2003, '2015-12-25', '373839 BCD Colony', 'Sector 18', 'West Delhi', 'S', 24000, 130000, 2014, '800 sqft', '2BHK' 
+   )
+, 
+   (
+      2013, '2016-02-06', '404142 EFG Colony', 'Raheja Residency', 'South Delhi', 'R', 13000, 210000, 2015, '1000 sqft', '3BHK' 
+   )
+, 
+   (
+      2023, '2012-01-01', '434445 HIJ Colony', 'MG Road', 'South Delhi', 'SR', 18500, 145000, 2012, '900 sqft', '1BHK' 
+   )
+, 
+   (
+      2033, ' 2012-12-23', '123 Main St', 'Vijay Nagar', 'North Delhi', 'S', 15000, 1500000, 2010, '1500', '3BHK' 
+   )
+, 
+   (
+      2004, '2017-12-29', '456 First Ave', ' Raheja Residency', 'South Delhi', 'Rented', 20000, 2500000, 2015, '2000', '2BHK' 
+   )
+, 
+   (
+      2014, '2013-11-15', '789 Park Blvd', 'Sector 18', 'West Delhi', 'SR', 22000, 1800000, 2012, '1800', '1BHK' 
+   )
+, 
+   (
+      2024, '2009-05-12', '321 Second St', 'Raheja Residency', 'South Delhi', 'S', 12000, 1300000, 2008, '1200', '2BHK' 
+   )
+, 
+   (
+      2034, '2013-07-11', '654 Third Ave', 'Vijay Nagar', 'North Delhi', 'R', 15000, 2000000, 2010, '1800', '3BHK' 
+   )
+, 
+   (
+      2005, ' 2016-08-17', '987 Park Blvd', 'MG Road', 'South Delhi', 'SR', 18000, 1500000, 2015, '1500', '2BHK' 
+   )
+, 
+   (
+      2015, '2014-06-16', '432 Main St', 'Raheja Residency', 'South Delhi', 'S', 20000, 2200000, 2012, '2000', '3BHK' 
+   )
+, 
+   (
+      2025, '2011-03-23', '765 First Ave', 'MG Road', 'South Delhi', 'R', 22000, 1800000, 2008, '1600', '1BHK' 
+   )
+, 
+   (
+      2035, '2011-01-14', '098 Park Blvd', 'Vijay Nagar', 'North Delhi', 'SR', 15000, 1300000, 2010, '1200', '2BHK' 
+   )
+, 
+   (
+      2006, '2010-07-23', '543 Second St', 'Raheja Residency', 'South Delhi', 'Sold', 18000, 2000000, 2015, '1800', '3BHK' 
+   )
+, 
+   (
+      2016, '2021-11-26', 'Sector 18', 'Sector 18', 'West Delhi', 'SR', 12000, 2000000, 2018, '1000', '2BHK' 
+   )
+, 
+   (
+      2026, '2009-03-27', 'Sector 62', 'MG Road', 'South Delhi', 'Rented', 18000, 1500000, 2009, '800', '1BHK' 
+   )
+, 
+   (
+      2036, '2016-02-29', 'Sector 79', 'Vijay Nagar', 'North Delhi', 'SR', 23000, 3000000, 2015, '1200', '3BHK' 
+   )
+, 
+   (
+      2007, '2015-06-23', 'Sector 85', 'Raheja Residency', 'South Delhi', 'S', 22000, 1800000, 2012, '1000', '2BHK' 
+   )
+, 
+   (
+      2017, '2007-12-25', 'Sector 62', 'Sector 18', 'West Delhi', 'R', 13000, 1300000, 2005, '900', '2BHK' 
+   )
+, 
+   (
+      2027, '2012-11-23', 'Sector 120', 'MG Road', 'South Delhi', 'Sold', 24000, 2200000, 2010, '1100', '2BHK' 
+   )
+, 
+   (
+      2037, '2018-10-15', 'Sector 82', 'Vijay Nagar', 'North Delhi', 'SR', 15000, 2500000, 2017, '1000', '2BHK' 
+   )
+, 
+   (
+      2008, '2017-07-12', 'Sector 70', 'Raheja Residency', 'South Delhi', 'Rented', 22000, 2800000, 2014, '1200', '3BHK' 
+   )
+, 
+   (
+      2018, '2012-12-24', 'Sector 76', 'Sector 18', 'West Delhi', 'Sold', 17000, 2000000, 2011, '1000', '2BHK' 
+   )
+, 
+   (
+      2028, '2015-03-06', 'Sector 77', 'MG Road', 'South Delhi', 'SR', 25000, 4000000, 2015, '1500', '3BHK' 
+   )
+, 
+   (
+      2038, '2009-05-11', 'Sector 117', 'Vijay Nagar', 'North Delhi', 'Sold', 12000, 1500000, 2007, '700', '1BHK' 
+   )
+, 
+   (
+      2009, '2019-06-15', 'Sector 22', 'Sector 18', 'West Delhi', 'SR', 20000, 3000000, 2016, '1200', '3BHK' 
+   )
+, 
+   (
+      2019, '2010-06-17', 'Sector 93', 'Raheja Residency', 'South Delhi', 'R', 14000, 1200000, 2010, '800', '1BHK' 
+   )
+, 
+   (
+      2029, '2015-08-15', 'Sector 85', 'MG Road', 'South Delhi', 'SR', 19000, 2200000, 2013, '1000', '2BHK' 
+   )
+, 
+   (
+      2039, '2012-07-24', 'Sector 76', 'Vijay Nagar', 'North Delhi', 'S', 20000, 2500000, 2011, '1200', '3BHK' 
+   )
+;
+INSERT INTO
+   property ( p_id, seller_id, date_of_reg, address_line_1, address_line_2, address_line_3, mode, renting_price, selling_price, year_of_construction, size, p_type ) 
+VALUES(3050,2001,'2021-11-21','456 DEF Colony','MRP Road', 'South Delhi','R',18000,2400000,2021,'5000 sqft','3BHK'),(540,3799, '2023-02-28', '456 Park Ave', "Vikas Nagar", 'Los Angeles', 'Sold', 3000, 200000, 2010, '1500 sqft', 'apartment');
+
+
+-- Data for Status table
+INSERT INTO
+   status ( p_id, buyer_id, date, emp_ID_buyer ) 
+VALUES(3001,1005,'2014-08-18',7);
+
+INSERT INTO
+   status ( p_id, buyer_id, date, emp_ID_buyer ) 
+VALUES(540,1005,'2023-02-18',7),
+
+   (
+      3001, 1034, '2018-03-21', 5
+   )
+, 
+   (
+      3006, 1002, '2018-05-23', 39
+   )
+, 
+   (
+      3009, 1023, '2014-08-18', 33
+   )
+, 
+   (
+      3016, 1012, '2018-12-04', 35
+   )
+, 
+   (
+      3024, 1039, '2011-12-04', 30
+   )
+, 
+   (
+      3026, 1033, '2011-11-09', 35
+   )
+, 
+   (
+      3030, 1000, '2012-12-17', 5
+   )
+, 
+   (
+      3032, 1017, '2018-10-26', 13
+   )
+, 
+   (
+      3033, 1025, '2015-04-18', 39
+   )
+, 
+   (
+      3035, 1010, '2010-02-11', 30
+   )
+;
+
+-- Trigger to update 'time' i.e. time that property spent in the database
+Delimiter //
+CREATE TRIGGER CALC_PROPERTY_TIME BEFORE INSERT ON 
+STATUS FOR EACH ROW  
+BEGIN 
+	DECLARE prop_date DATE ;  
+	DECLARE time_diff INT;
+	DECLARE time_string VARCHAR(100);
+	
+ SELECT date_of_reg INTO prop_date
+	FROM property
+	WHERE p_id = NEW.p_id;
+	SET time_diff = DATEDIFF(NEW.date, prop_date);
+	SET
+	    time_string = CONCAT(
+	        FLOOR(time_diff / 365),
+	        ' years ',
+	        FLOOR( (time_diff % 365) / 30),
+	        ' months ', (time_diff % 365) % 30,
+	        ' days'
+	    );
+	SET NEW.time = time_string;
+END//
+delimiter ;
+
+    
+-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Queries
+use dbms_project;
+#1
+SELECT * FROM property
+WHERE address_line_3 = 'South Delhi'
+AND year_of_construction > 2020
+AND mode = 'R';
+
+
+#2
+SELECT address_line_1, address_line_2, address_line_3 FROM property
+WHERE address_line_3 = 'West Delhi'
+AND selling_price >= 3000000
+AND selling_price <= 5000000;
+
+#3
+SELECT address_line_1, address_line_2, address_line_3 FROM property
+WHERE address_line_2 = 'Vijay Nagar' 
+AND mode = 'R'
+AND (p_type ='2BHK' or p_type='3BHK')
+AND renting_price < 15000;
+
+#4
+SELECT e.name AS agent_name, SUM(p.selling_price) AS total_amount
+FROM employee e
+JOIN seller s ON e.emp_id = s.emp_id
+JOIN property p ON s.seller_id = p.seller_id
+JOIN status st ON p.p_id = st.p_id
+WHERE YEAR(st.date) = 2023
+GROUP BY e.name
+ORDER BY total_amount DESC
+LIMIT 1;
+
+#5
+SELECT s.seller_id, e.name AS agent_name, AVG(p.selling_price) AS avg_selling_price, AVG(DATEDIFF(st.date, p.date_of_reg)) AS avg_time_on_market_in_days
+FROM seller s
+JOIN employee e ON s.emp_id = e.emp_id
+JOIN property p ON s.seller_id = p.seller_id
+JOIN status st ON p.p_id = st.p_id
+WHERE YEAR(p.date_of_reg) = 2018
+GROUP BY s.seller_id;
+
+
+#6
+SELECT * FROM property WHERE selling_price = (SELECT MAX(selling_price) FROM property)
+Union
+SELECT * FROM property WHERE renting_price = (SELECT MAX(renting_price) FROM property);
+
+    
