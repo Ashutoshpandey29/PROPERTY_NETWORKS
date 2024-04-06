@@ -28,10 +28,10 @@ class Propertynetworks(QMainWindow, Ui_QmainWindow):
     def login(self):
         try:
             mydb = mc.connect(
-                host="localhost",
-                user="root",
-                password="Yash@2914",
-                database="dbms_project"
+                host="",
+                user="",
+                password="",
+                database=""
             )
             cursor = mydb.cursor()
             userID = str(self.LineEdit.text())
